@@ -68,11 +68,13 @@ head(nh_counties_all)
 Test your knowledge: Write the code to pivot the New Hampshire data to a longer form, then back. Note the inclusion of the FIPS code, which is unique to each county, changes the code"
 
 ```{r}
-
-
+nh_counties_long <- nh_counties_all %>% 
+  select(-c("fips")) %>%
+  pivot_longer(cols = c(-name), names_to = "candidate", values_to = "votes")
+head(nh_counties_long, n=20)
 ```
 
-If you wrote the above code correctly, you should be able to run the code below and [match the results from AP](https://www.google.com/search?q=fianl+results+new+hampshire&rlz=1C5CHFA_enUS865US865&oq=fianl+results+new+hampshire&aqs=chrome..69i57j33l7.3442j0j7&sourceid=chrome&ie=UTF-8).
+If you wrote the above code correctly, you should be able to run the code below and [match the results from AP](https://www.google.com/search?q=final+results+new+hampshire&rlz=1C5CHFA_enUS865US865&oq=fianl+results+new+hampshire&aqs=chrome..69i57j33l7.3442j0j7&sourceid=chrome&ie=UTF-8).
 
 ```{r, eval=FALSE}
 nh_counties_agg <- nh_counties_long %>%
@@ -85,7 +87,7 @@ glimpse(nh_counties_agg)
 
 
 ## Simple Introduction to Writing Functions
-
+#Running the same code twice
 We use this basic syntax for writing functions (this is pseudocode):
 
 ```{bash, eval=FALSE}
